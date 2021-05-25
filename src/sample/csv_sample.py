@@ -15,13 +15,16 @@ class SampleModel(AbstractModel):
 class SampleFileReader(AbstractFileReader):
     model = SampleModel()
     splitter = CSVSplitter()
+    skip_header = True
 
-    def validate_line(self, line):
-        return super().validate_line(line) and line[0] == 'D'
+    def validate_line(self, line, line_number):
+        return super().validate_line(line, line_number) and line[0] == 'D'
 
 
 if __name__ == '__main__':
     reader = SampleFileReader()
-    data = reader.run('./csv_sample_file.csv')
-    for d in data:
-        print(d)
+
+    with open('./csv_sample_file.csv', 'r') as f:
+        data = reader.run(f)
+        for d in data:
+            print(d)

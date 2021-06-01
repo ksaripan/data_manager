@@ -1,6 +1,6 @@
 import datetime
 
-from data_manager.models.fields.abstract_field import AbstractField
+from .abstract_field import AbstractField, Constants
 
 __all__ = [
     "DatetimeField",
@@ -8,9 +8,9 @@ __all__ = [
 
 
 class DatetimeField(AbstractField):
-    def __init__(self, name, strip=True, default_value=None, length=0, start_position=None,
+    def __init__(self, name, strip=True, default_value=None, length=0, start_position=None, align=Constants.ALIGN_DEFAULT,
                  d_format='%Y-%m-%dT%H%M%S') -> None:
-        super().__init__(name, strip, default_value, length, start_position)
+        super().__init__(name, strip, default_value, length, start_position, align)
         self.__format = d_format
 
     def to_string(self, data):

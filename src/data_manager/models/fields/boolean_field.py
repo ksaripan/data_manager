@@ -1,4 +1,4 @@
-from data_manager.models.fields.abstract_field import AbstractField
+from .abstract_field import AbstractField, Constants
 
 __all__ = [
     "BooleanField",
@@ -6,9 +6,9 @@ __all__ = [
 
 
 class BooleanField(AbstractField):
-    def __init__(self, name, strip=True, default_value=None, length=0, start_position=None, true_string='T',
-                 false_string='F') -> None:
-        super().__init__(name, strip, default_value, length, start_position)
+    def __init__(self, name, strip=True, default_value=None, length=0, start_position=None, align=Constants.ALIGN_DEFAULT,
+                 true_string='T', false_string='F') -> None:
+        super().__init__(name, strip, default_value, length, start_position, align)
         self.__true_string = true_string
         self.__false_string = false_string
 

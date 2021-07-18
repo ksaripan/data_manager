@@ -1,5 +1,7 @@
 import os
 
+from data_manager.models import EmptyField
+
 __all__ = [
     "AbstractFileReader",
 ]
@@ -64,6 +66,8 @@ class AbstractFileReader:
             self.fields[idx_value[0]].from_string(idx_value[1])
         ), enumerate(d))
         d = dict(d)
+        # Remove empty field
+        d.pop(EmptyField.EMPTY_FIELD_NAME, None)
         return d
 
     def post_process_line(self, d, extra, line_number):

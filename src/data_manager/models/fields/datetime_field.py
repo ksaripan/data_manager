@@ -14,7 +14,7 @@ class DatetimeField(AbstractField):
         self.__format = d_format
 
     def to_string(self, data):
-        return data.strftime(self.__format)
+        return data.strftime(self.__format) if data else ''
 
     def convert(self, data):
         return datetime.datetime.strptime(data, self.__format) if data else None

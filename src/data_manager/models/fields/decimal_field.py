@@ -1,4 +1,4 @@
-from _pydecimal import Decimal
+from decimal import Decimal
 
 from data_manager.models.fields.abstract_field import AbstractField
 

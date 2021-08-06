@@ -3,10 +3,8 @@ from decimal import Decimal
 from data_manager.models import AbstractModel
 from data_manager.models import fields
 from data_manager.models.fields.abstract_field import Constants
-from data_manager.reader import AbstractFileReader
-from data_manager.reader.splitter import FixWidthSplitter
-from data_manager.writer import AbstractFileWriter
-from data_manager.writer.formatters import FixWidthFormatter
+from data_manager.reader import FixWidthFileReader
+from data_manager.writer import FixWidthFileWriter
 
 
 class SampleModel(AbstractModel):
@@ -18,18 +16,16 @@ class SampleModel(AbstractModel):
     )
 
 
-class SampleFileReader(AbstractFileReader):
+class SampleFileReader(FixWidthFileReader):
     model = SampleModel()
-    splitter = FixWidthSplitter()
     skip_header = True
 
     def validate_line(self, line, line_number):
         return super().validate_line(line, line_number) and line[0] == 'D'
 
 
-class SampleFileWriter(AbstractFileWriter):
+class SampleFileWriter(FixWidthFileWriter):
     model = SampleModel()
-    formatter = FixWidthFormatter()
 
 
 if __name__ == '__main__':

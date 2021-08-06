@@ -1,10 +1,18 @@
 from data_manager.models.fields.abstract_field import Constants
-from .abstract_formatter import AbstractFormatter
+from data_manager.writer import AbstractFileWriter
+
+__all__ = [
+    'FixWidthFileWriter',
+]
 
 
-class FixWidthFormatter(AbstractFormatter):
-    def format_line(self, model, d):
-        fields = model.get_fields()
+class FixWidthFileWriter(AbstractFileWriter):
+
+    def get_adapter(self, resource_file):
+        return resource_file
+
+    def format_line(self, d):
+        fields = self.model.get_fields()
         value_list = []
 
         for f in fields:

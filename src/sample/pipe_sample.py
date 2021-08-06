@@ -2,9 +2,8 @@ from decimal import Decimal
 
 from data_manager.models import AbstractModel
 from data_manager.models import fields
-from data_manager.reader import AbstractFileReader, PipeSplitter
-from data_manager.writer import AbstractFileWriter
-from data_manager.writer.formatters.delimited_formatter import PipeDelimitedFormatter
+from data_manager.reader import CSVFileReader
+from data_manager.writer import CSVFileWriter
 
 
 class SampleModel(AbstractModel):
@@ -16,18 +15,18 @@ class SampleModel(AbstractModel):
     )
 
 
-class SampleFileReader(AbstractFileReader):
+class SampleFileReader(CSVFileReader):
     model = SampleModel()
-    splitter = PipeSplitter()
     skip_header = True
+    delimiter = '|'
 
     def validate_line(self, line, line_number):
         return super().validate_line(line, line_number) and line[0] == 'D'
 
 
-class SampleFileWriter(AbstractFileWriter):
+class SampleFileWriter(CSVFileWriter):
     model = SampleModel()
-    formatter = PipeDelimitedFormatter()
+    delimiter = '|'
 
     def prepare_write(self, f, data):
         super().prepare_write(f, data)

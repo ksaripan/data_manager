@@ -9,8 +9,6 @@ __all__ = [
 
 class AbstractFileReader:
     model = None
-    splitter = None
-    encoding = 'utf-8'
     skip_header = False
 
     def __init__(self) -> None:
@@ -26,11 +24,15 @@ class AbstractFileReader:
     def prepare_read(self, resource_file):
         pass
 
+    def get_adapter(self, resource_file):
+        raise NotImplementedError()
+
     def read(self, resource_file):
         data = list()
         extra = self.get_extra(resource_file)
         line_number = -1
-        for line in resource_file:
+        adapter = self.get_adapter(resource_file)
+        for line in adapter:
             line_number += 1
             valid_line = self.validate_line(line, line_number)
             if not valid_line:
@@ -51,21 +53,16 @@ class AbstractFileReader:
         return skip and line
 
     def pre_process_line(self, line, line_number):
-        line = line.rstrip('\n')
-        line = line.rstrip('\r')
         return line
 
-    def process_line(self, line, line_number):
-        d = self.splitter.split(line, self.model)
-        # Changes to tuple unpack feature that is remove in python3
-        # idx = idx_value[0]
-        # value = idx_value[1]
-        # d = map(lambda idx_value: self.fields[idx_value[0]].from_string(idx_value[1]), enumerate(d))
-        d = map(lambda idx_value: (
-            self.fields[idx_value[0]].get_name(),
-            self.fields[idx_value[0]].from_string(idx_value[1])
-        ), enumerate(d))
-        d = dict(d)
+    def process_line(self, data, line_number):
+        data_length = len(data)
+        d = dict()
+        for idx in range(len(self.fields)):
+            f = self.fields[idx]
+            field_name = f.get_name()
+            field_value = f.from_string(data[idx] if idx < data_length else None)
+            d[field_name] = field_value
         # Remove empty field
         d.pop(EmptyField.EMPTY_FIELD_NAME, None)
         return d

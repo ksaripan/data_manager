@@ -31,7 +31,7 @@ class AbstractField:
         return self.__align
 
     def from_string(self, data):
-        if self.__strip:
+        if self.__strip and data is not None:
             data = data.strip()
         result = self.convert(data)
         if result is None:

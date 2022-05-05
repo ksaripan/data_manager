@@ -13,7 +13,13 @@ class AbstractFileReader:
 
     def __init__(self) -> None:
         super().__init__()
-        self.fields = self.model.get_fields()
+        self.fields = None
+        self.set_model(self.model)
+
+    def set_model(self, model):
+        self.model = model
+        if self.model is not None:
+            self.fields = self.model.get_fields()
 
     def run(self, resource_file):
         self.prepare_read(resource_file)

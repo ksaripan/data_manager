@@ -12,7 +12,7 @@ class SampleModel(AbstractModel):
         fields.CharField('rec_type', start_position=0, length=1),
         fields.CharField('name', start_position=1, length=15),
         fields.DateField('birth_date', start_position=16, length=8, d_format='%Y%m%d'),
-        fields.DecimalField('money', start_position=24, length=6, align=Constants.ALIGN_RIGHT, default_value=Decimal('0.00')),
+        fields.DecimalField('money', start_position=24, length=10, align=Constants.ALIGN_RIGHT, default_value=Decimal('0.00')),
     )
 
 

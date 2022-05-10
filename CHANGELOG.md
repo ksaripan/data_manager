@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.5
+### Add
+- Support decimal field without "." Ex. 1000 with decimal places = 2, then the result should be 10.00
+
 ## 0.0.4
 ### Fix
 - Fix Integer field convert fix value to null

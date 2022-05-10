@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.7
+### Add
+- Support decimal data field with all zero. Ex. 0000
+
 ## 0.0.6
 ### Add
 - Support decimal data field with leading zero. Ex. 00-49.00

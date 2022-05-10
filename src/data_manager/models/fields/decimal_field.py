@@ -32,4 +32,8 @@ class DecimalField(AbstractField):
         # Handle data with leading-zero
         # Ex. 00-49.00
         data = data.lstrip('0')
+        # Handle data with all zero
+        # Ex. 0000
+        if len(data) == 0:
+            data = '0.00'
         return Decimal(data)

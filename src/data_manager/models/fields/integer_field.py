@@ -11,4 +11,4 @@ class IntegerField(DecimalField):
 
     def convert(self, data):
         data = DecimalField.convert(self, data)
-        return int(data) if data else None
+        return int(data) if data is not None else None

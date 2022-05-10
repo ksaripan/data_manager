@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4
+### Fix
+- Fix Integer field convert fix value to null
+
 ## 0.0.3
 ### Add
 - Support AbstractReader can now change model

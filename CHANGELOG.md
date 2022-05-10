@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.6
+### Add
+- Support decimal data field with leading zero. Ex. 00-49.00
+
 ## 0.0.5
 ### Add
 - Support decimal field without "." Ex. 1000 with decimal places = 2, then the result should be 10.00

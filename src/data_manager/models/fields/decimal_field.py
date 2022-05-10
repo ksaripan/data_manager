@@ -29,4 +29,7 @@ class DecimalField(AbstractField):
         data = data.replace(self.delimiter, '')
         if self.decimal_places:
             data = data[:-self.decimal_places] + '.' + data[-self.decimal_places:]
+        # Handle data with leading-zero
+        # Ex. 00-49.00
+        data = data.lstrip('0')
         return Decimal(data)

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.8
+### Fix
+- Handle invalid value for date/datetime field. Ex. 99999999
+
 ## 0.0.7
 ### Add
 - Support decimal data field with all zero. Ex. 0000
